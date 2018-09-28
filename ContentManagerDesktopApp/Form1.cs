@@ -12,6 +12,7 @@ namespace ContentManagerDesktopApp
 {
     public partial class Home : Form
     {
+        MainSystem mainSystem = new MainSystem();
 
         public Home()
         {
@@ -20,7 +21,7 @@ namespace ContentManagerDesktopApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MainSystem mainSystem = new MainSystem();
+            
         }
 
 
@@ -41,7 +42,12 @@ namespace ContentManagerDesktopApp
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            
+            if(mainSystem.VerifyLogin(userLoginTextBox.Text, passLoginTextBox.Text) == false)
+            {
+                loginMessageLabel.Visible = true;
+                loginMessageLabel.Text = "Invalid Login";
+            }
         }
+
     }
 }

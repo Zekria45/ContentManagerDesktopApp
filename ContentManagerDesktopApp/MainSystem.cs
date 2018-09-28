@@ -11,9 +11,9 @@ namespace ContentManagerDesktopApp
         String testUser = "Joe";
         String testPass = "password";
 
-        
+        private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
 
-        public bool VerifyLogin()
+        public bool VerifyLogin(String username, string password)
         {
 
             return false;

@@ -39,12 +39,14 @@
             this.closeButton = new System.Windows.Forms.Button();
             this.minButton = new System.Windows.Forms.Button();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
+            this.loginMessageLabel = new System.Windows.Forms.Label();
             this.Login.SuspendLayout();
             this.SuspendLayout();
             // 
             // Login
             // 
             this.Login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Login.Controls.Add(this.loginMessageLabel);
             this.Login.Controls.Add(this.newUserLabel);
             this.Login.Controls.Add(this.loginButton);
             this.Login.Controls.Add(this.passLoginTextBox);
@@ -147,6 +149,16 @@
             this.minButton.UseVisualStyleBackColor = true;
             this.minButton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // loginMessageLabel
+            // 
+            this.loginMessageLabel.AutoSize = true;
+            this.loginMessageLabel.ForeColor = System.Drawing.Color.Black;
+            this.loginMessageLabel.Location = new System.Drawing.Point(232, 414);
+            this.loginMessageLabel.Name = "loginMessageLabel";
+            this.loginMessageLabel.Size = new System.Drawing.Size(27, 13);
+            this.loginMessageLabel.TabIndex = 7;
+            this.loginMessageLabel.Text = "N/A";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,6 +193,7 @@
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.TextBox passLoginTextBox;
         private System.Windows.Forms.LinkLabel newUserLabel;
+        private System.Windows.Forms.Label loginMessageLabel;
     }
 }
 

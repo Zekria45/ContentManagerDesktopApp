@@ -24,12 +24,6 @@ namespace ContentManagerDesktopApp
             
         }
 
-
-        private void loginUserTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e) // minimize button
         {
             this.WindowState = FormWindowState.Minimized;
@@ -49,5 +43,32 @@ namespace ContentManagerDesktopApp
             }
         }
 
+        private void userLoginTextBox_Click(object sender, EventArgs e)
+        {
+            userLoginTextBox.Text = "";
+            userLoginTextBox.ForeColor = System.Drawing.Color.Black;
+        }
+
+        private void passLoginTextBox_Click(object sender, EventArgs e)
+        {
+            passLoginTextBox.Text = "";
+            passLoginTextBox.ForeColor = System.Drawing.Color.Black;
+        }
+
+        private void userLoginTextBox_TextChanged(object sender, EventArgs e)
+        {
+            userLoginTextBox.ForeColor = System.Drawing.Color.Black;
+        }
+
+        private void passLoginTextBox_TextChanged(object sender, EventArgs e)
+        {
+            passLoginTextBox.ForeColor = System.Drawing.Color.Black;
+            passLoginTextBox.PasswordChar = '*';
+        }
+
+        private void userLoginTextBox_Enter(object sender, EventArgs e)
+        {
+            userLoginTextBox.ForeColor = System.Drawing.Color.Black;
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.Login = new System.Windows.Forms.Panel();
+            this.loginMessageLabel = new System.Windows.Forms.Label();
             this.newUserLabel = new System.Windows.Forms.LinkLabel();
             this.loginButton = new System.Windows.Forms.Button();
             this.passLoginTextBox = new System.Windows.Forms.TextBox();
@@ -39,7 +40,6 @@
             this.closeButton = new System.Windows.Forms.Button();
             this.minButton = new System.Windows.Forms.Button();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
-            this.loginMessageLabel = new System.Windows.Forms.Label();
             this.Login.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,18 @@
             this.Login.Name = "Login";
             this.Login.Size = new System.Drawing.Size(498, 462);
             this.Login.TabIndex = 0;
+            // 
+            // loginMessageLabel
+            // 
+            this.loginMessageLabel.AutoSize = true;
+            this.loginMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.loginMessageLabel.ForeColor = System.Drawing.Color.Black;
+            this.loginMessageLabel.Location = new System.Drawing.Point(196, 411);
+            this.loginMessageLabel.Name = "loginMessageLabel";
+            this.loginMessageLabel.Size = new System.Drawing.Size(121, 25);
+            this.loginMessageLabel.TabIndex = 7;
+            this.loginMessageLabel.Text = "Invalid Login";
+            this.loginMessageLabel.Visible = false;
             // 
             // newUserLabel
             // 
@@ -93,6 +105,8 @@
             this.passLoginTextBox.Size = new System.Drawing.Size(232, 38);
             this.passLoginTextBox.TabIndex = 4;
             this.passLoginTextBox.Text = "password";
+            this.passLoginTextBox.Click += new System.EventHandler(this.passLoginTextBox_Click);
+            this.passLoginTextBox.TextChanged += new System.EventHandler(this.passLoginTextBox_TextChanged);
             // 
             // userLoginTextBox
             // 
@@ -104,6 +118,8 @@
             this.userLoginTextBox.Size = new System.Drawing.Size(232, 38);
             this.userLoginTextBox.TabIndex = 3;
             this.userLoginTextBox.Text = "username";
+            this.userLoginTextBox.Click += new System.EventHandler(this.userLoginTextBox_Click);
+            this.userLoginTextBox.Enter += new System.EventHandler(this.userLoginTextBox_Enter);
             // 
             // loginTextBox
             // 
@@ -148,16 +164,6 @@
             this.minButton.Text = "_";
             this.minButton.UseVisualStyleBackColor = true;
             this.minButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // loginMessageLabel
-            // 
-            this.loginMessageLabel.AutoSize = true;
-            this.loginMessageLabel.ForeColor = System.Drawing.Color.Black;
-            this.loginMessageLabel.Location = new System.Drawing.Point(232, 414);
-            this.loginMessageLabel.Name = "loginMessageLabel";
-            this.loginMessageLabel.Size = new System.Drawing.Size(27, 13);
-            this.loginMessageLabel.TabIndex = 7;
-            this.loginMessageLabel.Text = "N/A";
             // 
             // Home
             // 

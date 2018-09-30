@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ContentManagerDesktopApp
 {
     class MainSystem
     {
-        static String testUser = "Joe";
+        String userDirectory = @"C:\Content Manager\Users";
+        String testUser = "Joe";
         String testPass = "amazon";
         String encryptedTestPass;
-        private String EncrpytKey = "boogietime";
+        private String EncrpytKey = "GWvkrOOvtIyxD9pOfyjs";
 
         public MainSystem()
         {
             encryptedTestPass= StringCipher.Encrypt(testPass, EncrpytKey);
+            CreateUser(testUser, testPass);
         }
 
         private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
@@ -24,6 +27,23 @@ namespace ContentManagerDesktopApp
         {
 
             return false;
+        }
+
+        public bool CreateUser(string username, string password)
+        {
+            string fullDirectory = Path.Combine(userDirectory,testUser);
+            try
+            {
+                if (!Directory.Exists(fullDirectory))
+                {
+                    Directory.CreateDirectory(fullDirectory);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -8,8 +8,15 @@ namespace ContentManagerDesktopApp
 {
     class MainSystem
     {
-        String testUser = "Joe";
-        String testPass = "password";
+        static String testUser = "Joe";
+        String testPass = "amazon";
+        String encryptedTestPass;
+        private String EncrpytKey = "boogietime";
+
+        public MainSystem()
+        {
+            encryptedTestPass= StringCipher.Encrypt(testPass, EncrpytKey);
+        }
 
         private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
 

@@ -38,6 +38,12 @@ namespace ContentManagerDesktopApp
                 {
                     Directory.CreateDirectory(fullDirectory);
                 }
+                string fileName = username + "EncrpytData.txt";
+                string fileNameLocation = Path.Combine(fullDirectory,fileName);
+                if(!File.Exists(fileNameLocation))
+                {
+                    File.Create(fileNameLocation);
+                }
                 return true;
             }
             catch

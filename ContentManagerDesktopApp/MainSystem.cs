@@ -42,13 +42,34 @@ namespace ContentManagerDesktopApp
                 string fileNameLocation = Path.Combine(fullDirectory,fileName);
                 if(!File.Exists(fileNameLocation))
                 {
-                    File.Create(fileNameLocation);
+                    //File.Create(fileNameLocation);
+                    StreamWriter newFile = new StreamWriter(fileNameLocation);
+                    newFile.WriteLine(username + "\n");
+                    string encryptedPass = StringCipher.Encrypt(password, EncrpytKey);
+                    newFile.Write(encryptedPass);
+                    newFile.Close();
+
                 }
                 return true;
             }
             catch
             {
                 return false;
+            }
+        }
+
+        public void CreateInitialDirectory()
+        {
+            try
+            {
+                if (!File.Exists(userDirectory))
+                {
+                    Directory.CreateDirectory(userDirectory);
+                }
+            }
+            catch
+            {
+
             }
         }
     }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.Login = new System.Windows.Forms.Panel();
+            this.passLoginTextBoxConfirm = new System.Windows.Forms.TextBox();
             this.AppLogo = new System.Windows.Forms.PictureBox();
             this.loginMessageLabel = new System.Windows.Forms.Label();
             this.newUserLabel = new System.Windows.Forms.LinkLabel();
@@ -47,6 +48,7 @@
             // Login
             // 
             this.Login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Login.Controls.Add(this.passLoginTextBoxConfirm);
             this.Login.Controls.Add(this.AppLogo);
             this.Login.Controls.Add(this.loginMessageLabel);
             this.Login.Controls.Add(this.newUserLabel);
@@ -60,6 +62,20 @@
             this.Login.Name = "Login";
             this.Login.Size = new System.Drawing.Size(498, 462);
             this.Login.TabIndex = 0;
+            // 
+            // passLoginTextBoxConfirm
+            // 
+            this.passLoginTextBoxConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.passLoginTextBoxConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.passLoginTextBoxConfirm.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.passLoginTextBoxConfirm.Location = new System.Drawing.Point(137, 323);
+            this.passLoginTextBoxConfirm.Name = "passLoginTextBoxConfirm";
+            this.passLoginTextBoxConfirm.Size = new System.Drawing.Size(232, 38);
+            this.passLoginTextBoxConfirm.TabIndex = 9;
+            this.passLoginTextBoxConfirm.Text = "confirm password";
+            this.passLoginTextBoxConfirm.Click += new System.EventHandler(this.passLoginTextBoxConfirm_Click);
+            this.passLoginTextBoxConfirm.TextChanged += new System.EventHandler(this.passLoginTextBoxConfirm_TextChanged);
             // 
             // AppLogo
             // 
@@ -99,6 +115,7 @@
             this.newUserLabel.TabIndex = 6;
             this.newUserLabel.TabStop = true;
             this.newUserLabel.Text = "New User?";
+            this.newUserLabel.Click += new System.EventHandler(this.newUserLabel_Click);
             // 
             // loginButton
             // 
@@ -121,7 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.passLoginTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.passLoginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.passLoginTextBox.Location = new System.Drawing.Point(137, 289);
+            this.passLoginTextBox.Location = new System.Drawing.Point(137, 279);
             this.passLoginTextBox.Name = "passLoginTextBox";
             this.passLoginTextBox.Size = new System.Drawing.Size(232, 38);
             this.passLoginTextBox.TabIndex = 4;
@@ -160,6 +177,7 @@
             // closeButton
             // 
             this.closeButton.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.closeButton.ForeColor = System.Drawing.Color.Black;
             this.closeButton.Location = new System.Drawing.Point(461, 12);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(25, 25);
@@ -171,13 +189,14 @@
             // minButton
             // 
             this.minButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minButton.ForeColor = System.Drawing.Color.Black;
             this.minButton.Location = new System.Drawing.Point(430, 12);
             this.minButton.Name = "minButton";
             this.minButton.Size = new System.Drawing.Size(25, 25);
             this.minButton.TabIndex = 2;
             this.minButton.Text = "_";
             this.minButton.UseVisualStyleBackColor = true;
-            this.minButton.Click += new System.EventHandler(this.button1_Click);
+            this.minButton.Click += new System.EventHandler(this.minButton_Click);
             // 
             // Home
             // 
@@ -216,6 +235,7 @@
         private System.Windows.Forms.LinkLabel newUserLabel;
         private System.Windows.Forms.Label loginMessageLabel;
         private System.Windows.Forms.PictureBox AppLogo;
+        private System.Windows.Forms.TextBox passLoginTextBoxConfirm;
     }
 }
 

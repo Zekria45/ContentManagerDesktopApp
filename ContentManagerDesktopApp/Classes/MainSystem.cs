@@ -10,15 +10,10 @@ namespace ContentManagerDesktopApp
     class MainSystem
     {
         String userDirectory = @"C:\Content Manager\Users";
-        String testUser = "Joe";
-        String testPass = "amazon";
-        String encryptedTestPass;
         private String EncrpytKey = "GWvkrOOvtIyxD9pOfyjs";
 
         public MainSystem()
         {
-            encryptedTestPass= StringCipher.Encrypt(testPass, EncrpytKey);
-            CreateUser(testUser, testPass);
         }
 
         private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
@@ -31,7 +26,7 @@ namespace ContentManagerDesktopApp
 
         public bool CreateUser(string username, string password)
         {
-            string fullDirectory = Path.Combine(userDirectory,testUser);
+            string fullDirectory = Path.Combine(userDirectory,username);
             try
             {
                 if (!Directory.Exists(fullDirectory))
@@ -42,7 +37,6 @@ namespace ContentManagerDesktopApp
                 string fileNameLocation = Path.Combine(fullDirectory,fileName);
                 if(!File.Exists(fileNameLocation))
                 {
-                    //File.Create(fileNameLocation);
                     StreamWriter newFile = new StreamWriter(fileNameLocation);
                     newFile.WriteLine(username + "\n");
                     string encryptedPass = StringCipher.Encrypt(password, EncrpytKey);
@@ -58,7 +52,7 @@ namespace ContentManagerDesktopApp
             }
         }
 
-        public void CreateInitialDirectory()
+        private void CreateInitialDirectory()
         {
             try
             {

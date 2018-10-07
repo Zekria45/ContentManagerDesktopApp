@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.Login = new System.Windows.Forms.Panel();
+            this.AppLogo = new System.Windows.Forms.PictureBox();
             this.loginMessageLabel = new System.Windows.Forms.Label();
             this.newUserLabel = new System.Windows.Forms.LinkLabel();
             this.loginButton = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.closeButton = new System.Windows.Forms.Button();
             this.minButton = new System.Windows.Forms.Button();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
-            this.AppLogo = new System.Windows.Forms.PictureBox();
             this.Login.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).BeginInit();
             this.SuspendLayout();
@@ -61,8 +61,22 @@
             this.Login.Size = new System.Drawing.Size(498, 462);
             this.Login.TabIndex = 0;
             // 
+            // AppLogo
+            // 
+            this.AppLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AppLogo.Image = ((System.Drawing.Image)(resources.GetObject("AppLogo.Image")));
+            this.AppLogo.Location = new System.Drawing.Point(137, 18);
+            this.AppLogo.Name = "AppLogo";
+            this.AppLogo.Size = new System.Drawing.Size(231, 153);
+            this.AppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AppLogo.TabIndex = 8;
+            this.AppLogo.TabStop = false;
+            // 
             // loginMessageLabel
             // 
+            this.loginMessageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.loginMessageLabel.AutoSize = true;
             this.loginMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.loginMessageLabel.ForeColor = System.Drawing.Color.Black;
@@ -75,6 +89,8 @@
             // 
             // newUserLabel
             // 
+            this.newUserLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.newUserLabel.AutoSize = true;
             this.newUserLabel.LinkColor = System.Drawing.Color.Black;
             this.newUserLabel.Location = new System.Drawing.Point(219, 341);
@@ -86,6 +102,8 @@
             // 
             // loginButton
             // 
+            this.loginButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.loginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.loginButton.ForeColor = System.Drawing.Color.Black;
@@ -99,6 +117,8 @@
             // 
             // passLoginTextBox
             // 
+            this.passLoginTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.passLoginTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.passLoginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.passLoginTextBox.Location = new System.Drawing.Point(137, 289);
@@ -111,6 +131,8 @@
             // 
             // userLoginTextBox
             // 
+            this.userLoginTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.userLoginTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.userLoginTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.userLoginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
@@ -124,6 +146,8 @@
             // 
             // loginTextBox
             // 
+            this.loginTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.loginTextBox.AutoSize = true;
             this.loginTextBox.Font = new System.Drawing.Font("Verdana", 30F);
             this.loginTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
@@ -155,26 +179,16 @@
             this.minButton.UseVisualStyleBackColor = true;
             this.minButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // AppLogo
-            // 
-            this.AppLogo.Image = ((System.Drawing.Image)(resources.GetObject("AppLogo.Image")));
-            this.AppLogo.Location = new System.Drawing.Point(137, 18);
-            this.AppLogo.Name = "AppLogo";
-            this.AppLogo.Size = new System.Drawing.Size(231, 153);
-            this.AppLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.AppLogo.TabIndex = 8;
-            this.AppLogo.TabStop = false;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(498, 505);
             this.Controls.Add(this.minButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.Login);
-            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Home";

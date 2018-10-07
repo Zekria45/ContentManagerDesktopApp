@@ -12,7 +12,7 @@ namespace ContentManagerDesktopApp
 {
     public partial class Home : Form
     {
-        enum WindowMode {Login, Register}
+        enum WindowMode { Login, Register }
         // allows moving of windows form
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -48,40 +48,34 @@ namespace ContentManagerDesktopApp
 
         private void loginButton_Click(object sender, EventArgs e) // behavior for pressing main action button (login/Regiser)
         {
-            if(currentMode == WindowMode.Login)
+            if (currentMode == WindowMode.Login)
             {
                 if (mainSystem.VerifyLogin(userLoginTextBox.Text, passLoginTextBox.Text) == false)
                 {
-                    loginMessageLabel.Visible = true;
-                    loginMessageLabel.Text = "Invalid Login";
-                    centerMessage();
+                    setMessage("Invalid Login");
                 }
             }
-            else if(currentMode == WindowMode.Register)
+            else if (currentMode == WindowMode.Register)
             {
-                if(passLoginTextBox.Text == passLoginTextBoxConfirm.Text)
+                if (passLoginTextBox.Text == passLoginTextBoxConfirm.Text)
                 {
-                    if(mainSystem.CreateUser(userLoginTextBox.Text,passLoginTextBox.Text))
+                    if (mainSystem.CreateUser(userLoginTextBox.Text, passLoginTextBox.Text))
                     {
-                        loginMessageLabel.Text = "User Created";
-                        centerMessage();
+                        switchMode();
+                        setMessage("User Created");
                     }
                 }
                 else
                 {
-                    loginMessageLabel.Visible = true;
-                    loginMessageLabel.Text = "passwords do not match";
-                    centerMessage();
+                    setMessage("passwords do not match");
                 }
-                
+
             }
             else
             {
-                loginMessageLabel.Visible = true;
-                loginMessageLabel.Text = "Unknown bug";
-                centerMessage();
+                setMessage("Unkown Bug");
             }
-            
+
         }
 
         private void userLoginTextBox_Click(object sender, EventArgs e)
@@ -117,7 +111,7 @@ namespace ContentManagerDesktopApp
         {
             passLoginTextBoxConfirm.ForeColor = System.Drawing.Color.Black;
             passLoginTextBoxConfirm.UseSystemPasswordChar = true;
-            
+
         }
 
         private void userLoginTextBox_Enter(object sender, EventArgs e)
@@ -136,29 +130,54 @@ namespace ContentManagerDesktopApp
 
         private void newUserLabel_Click(object sender, EventArgs e)
         {
-            passLoginTextBox.Text = "";
-            passLoginTextBox.UseSystemPasswordChar = false;
-            passLoginTextBoxConfirm.UseSystemPasswordChar = false;
-            userLoginTextBox.Text = "username";
-            passLoginTextBox.Text = "password";
-            passLoginTextBoxConfirm.Text = "confirm password";
-
-            currentMode = WindowMode.Register;
-            loginTextBox.Text = "Register";
-            loginTextBox.Location = new Point(165, 174);
-            loginButton.Text = "Register";
-            newUserLabel.Visible = false;
-            passLoginTextBoxConfirm.Visible = true;
+            switchMode();
         }
 
-        public void centerMessage()
+        public void switchMode() // method from switching from register mode to login mode 
         {
+            if(currentMode == WindowMode.Login)
+            {
+                currentMode = WindowMode.Register;
+
+                loginMessageLabel.Visible = false;
+                passLoginTextBox.Text = "";
+                passLoginTextBox.UseSystemPasswordChar = false;
+                passLoginTextBoxConfirm.UseSystemPasswordChar = false;
+                userLoginTextBox.Text = "username";
+                passLoginTextBox.Text = "password";
+                passLoginTextBoxConfirm.Text = "confirm password";
+                loginTextBox.Text = "Register";
+                loginTextBox.Location = new Point(160, 174);
+                loginButton.Text = "Register";
+                newUserLabel.Visible = false;
+                passLoginTextBoxConfirm.Visible = true;
+            }
+            else
+            {
+                currentMode = WindowMode.Login;
+
+                loginMessageLabel.Visible = false;
+                userLoginTextBox.Text = "username";
+                passLoginTextBox.Text = "";
+                passLoginTextBox.UseSystemPasswordChar = true;
+                passLoginTextBox.Text = "password";
+                passLoginTextBoxConfirm.Visible = false;
+                newUserLabel.Visible = true;
+                loginButton.Text = "Login";
+                loginTextBox.Text = "Login";
+                loginTextBox.Location = new Point(189, 174);
+            }
+        }
+
+        public void setMessage(string message)
+        {
+            loginMessageLabel.Visible = true;
+            loginMessageLabel.Text = message;
+
             loginMessageLabel.Visible = true;
             loginMessageLabel.AutoSize = false;
             loginMessageLabel.TextAlign = ContentAlignment.MiddleCenter;
             loginMessageLabel.Dock = DockStyle.Bottom;
         }
-
-        
     }
 }

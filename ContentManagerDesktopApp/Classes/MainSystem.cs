@@ -14,13 +14,13 @@ namespace ContentManagerDesktopApp
 
         public MainSystem()
         {
+
         }
 
-        private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
+        //private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
 
         public bool VerifyLogin(String username, string password)
         {
-
             return false;
         }
 

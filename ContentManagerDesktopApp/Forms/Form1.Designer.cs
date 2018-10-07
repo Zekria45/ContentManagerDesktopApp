@@ -67,8 +67,9 @@
             // 
             this.passLoginTextBoxConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.passLoginTextBoxConfirm.BackColor = System.Drawing.Color.Gray;
             this.passLoginTextBoxConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.passLoginTextBoxConfirm.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.passLoginTextBoxConfirm.ForeColor = System.Drawing.Color.Black;
             this.passLoginTextBoxConfirm.Location = new System.Drawing.Point(137, 323);
             this.passLoginTextBoxConfirm.Name = "passLoginTextBoxConfirm";
             this.passLoginTextBoxConfirm.Size = new System.Drawing.Size(232, 38);
@@ -95,7 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.loginMessageLabel.AutoSize = true;
             this.loginMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.loginMessageLabel.ForeColor = System.Drawing.Color.Black;
+            this.loginMessageLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.loginMessageLabel.Location = new System.Drawing.Point(192, 428);
             this.loginMessageLabel.Name = "loginMessageLabel";
             this.loginMessageLabel.Size = new System.Drawing.Size(121, 25);
@@ -136,8 +137,9 @@
             // 
             this.passLoginTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.passLoginTextBox.BackColor = System.Drawing.Color.Gray;
             this.passLoginTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.passLoginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.passLoginTextBox.ForeColor = System.Drawing.Color.Black;
             this.passLoginTextBox.Location = new System.Drawing.Point(137, 279);
             this.passLoginTextBox.Name = "passLoginTextBox";
             this.passLoginTextBox.Size = new System.Drawing.Size(232, 38);
@@ -150,9 +152,9 @@
             // 
             this.userLoginTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.userLoginTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.userLoginTextBox.BackColor = System.Drawing.Color.Gray;
             this.userLoginTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.userLoginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.userLoginTextBox.ForeColor = System.Drawing.Color.Black;
             this.userLoginTextBox.Location = new System.Drawing.Point(137, 235);
             this.userLoginTextBox.Name = "userLoginTextBox";
             this.userLoginTextBox.Size = new System.Drawing.Size(232, 38);

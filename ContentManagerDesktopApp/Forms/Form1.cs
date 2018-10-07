@@ -136,13 +136,11 @@ namespace ContentManagerDesktopApp
 
         private void newUserLabel_Click(object sender, EventArgs e)
         {
+            passLoginTextBox.Text = "";
             passLoginTextBox.UseSystemPasswordChar = false;
             passLoginTextBoxConfirm.UseSystemPasswordChar = false;
-            userLoginTextBox.ForeColor = System.Drawing.Color.Gray;
             userLoginTextBox.Text = "username";
-            passLoginTextBox.ForeColor = System.Drawing.Color.Gray;
             passLoginTextBox.Text = "password";
-            passLoginTextBoxConfirm.ForeColor = System.Drawing.Color.Gray;
             passLoginTextBoxConfirm.Text = "confirm password";
 
             currentMode = WindowMode.Register;
@@ -161,6 +159,6 @@ namespace ContentManagerDesktopApp
             loginMessageLabel.Dock = DockStyle.Bottom;
         }
 
-
+        
     }
 }

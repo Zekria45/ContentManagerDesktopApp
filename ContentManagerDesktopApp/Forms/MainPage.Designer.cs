@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             this.ButtonPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.userButton = new System.Windows.Forms.Button();
+            this.sidePanel = new System.Windows.Forms.Panel();
             this.homeButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.logOutLabel = new System.Windows.Forms.LinkLabel();
-            this.userButton = new System.Windows.Forms.Button();
-            this.settingsButton = new System.Windows.Forms.Button();
             this.ButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.TopPanel.SuspendLayout();
@@ -49,7 +49,7 @@
             this.ButtonPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ButtonPanel.Controls.Add(this.settingsButton);
             this.ButtonPanel.Controls.Add(this.userButton);
-            this.ButtonPanel.Controls.Add(this.panel1);
+            this.ButtonPanel.Controls.Add(this.sidePanel);
             this.ButtonPanel.Controls.Add(this.homeButton);
             this.ButtonPanel.Controls.Add(this.pictureBox1);
             this.ButtonPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -58,13 +58,43 @@
             this.ButtonPanel.Size = new System.Drawing.Size(200, 681);
             this.ButtonPanel.TabIndex = 0;
             // 
-            // panel1
+            // settingsButton
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel1.Location = new System.Drawing.Point(0, 142);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(12, 68);
-            this.panel1.TabIndex = 2;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsButton.Image = ((System.Drawing.Image)(resources.GetObject("settingsButton.Image")));
+            this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.settingsButton.Location = new System.Drawing.Point(12, 276);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(188, 68);
+            this.settingsButton.TabIndex = 4;
+            this.settingsButton.Text = " Settings";
+            this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
+            // userButton
+            // 
+            this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
+            this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.userButton.Location = new System.Drawing.Point(12, 209);
+            this.userButton.Name = "userButton";
+            this.userButton.Size = new System.Drawing.Size(188, 68);
+            this.userButton.TabIndex = 3;
+            this.userButton.Text = " User";
+            this.userButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.userButton.UseVisualStyleBackColor = true;
+            this.userButton.Click += new System.EventHandler(this.userButton_Click);
+            // 
+            // sidePanel
+            // 
+            this.sidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.sidePanel.Location = new System.Drawing.Point(0, 142);
+            this.sidePanel.Name = "sidePanel";
+            this.sidePanel.Size = new System.Drawing.Size(12, 68);
+            this.sidePanel.TabIndex = 2;
             // 
             // homeButton
             // 
@@ -79,6 +109,7 @@
             this.homeButton.Text = " Home";
             this.homeButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.homeButton.UseVisualStyleBackColor = true;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
             // 
             // pictureBox1
             // 
@@ -99,14 +130,14 @@
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(200, 0);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(984, 91);
+            this.TopPanel.Size = new System.Drawing.Size(984, 67);
             this.TopPanel.TabIndex = 1;
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLabel.Location = new System.Drawing.Point(135, 33);
+            this.usernameLabel.Location = new System.Drawing.Point(137, 20);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(120, 29);
             this.usernameLabel.TabIndex = 2;
@@ -116,7 +147,7 @@
             // 
             this.welcomeLabel.AutoSize = true;
             this.welcomeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.welcomeLabel.Location = new System.Drawing.Point(19, 33);
+            this.welcomeLabel.Location = new System.Drawing.Point(21, 20);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(121, 29);
             this.welcomeLabel.TabIndex = 1;
@@ -127,40 +158,13 @@
             this.logOutLabel.AutoSize = true;
             this.logOutLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logOutLabel.LinkColor = System.Drawing.Color.Black;
-            this.logOutLabel.Location = new System.Drawing.Point(848, 33);
+            this.logOutLabel.Location = new System.Drawing.Point(861, 20);
             this.logOutLabel.Name = "logOutLabel";
             this.logOutLabel.Size = new System.Drawing.Size(98, 29);
             this.logOutLabel.TabIndex = 0;
             this.logOutLabel.TabStop = true;
             this.logOutLabel.Text = "Log Out";
-            // 
-            // userButton
-            // 
-            this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
-            this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(12, 209);
-            this.userButton.Name = "userButton";
-            this.userButton.Size = new System.Drawing.Size(188, 68);
-            this.userButton.TabIndex = 3;
-            this.userButton.Text = " User";
-            this.userButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.userButton.UseVisualStyleBackColor = true;
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingsButton.Image = ((System.Drawing.Image)(resources.GetObject("settingsButton.Image")));
-            this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.settingsButton.Location = new System.Drawing.Point(12, 276);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(188, 68);
-            this.settingsButton.TabIndex = 4;
-            this.settingsButton.Text = " Settings";
-            this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.settingsButton.UseVisualStyleBackColor = true;
+            this.logOutLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logOutLabel_LinkClicked);
             // 
             // MainPage
             // 
@@ -175,7 +179,7 @@
             this.Name = "MainPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainPage";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainPage_Load);
             this.ButtonPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.TopPanel.ResumeLayout(false);
@@ -189,7 +193,7 @@
         private System.Windows.Forms.Panel ButtonPanel;
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel sidePanel;
         private System.Windows.Forms.Button homeButton;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label welcomeLabel;

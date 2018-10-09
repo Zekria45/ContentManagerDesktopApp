@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ContentManagerDesktopApp.Forms;
 
 namespace ContentManagerDesktopApp
 {
@@ -23,7 +24,7 @@ namespace ContentManagerDesktopApp
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-
+        
         MainSystem mainSystem = new MainSystem();
 
         public Home()
@@ -53,6 +54,11 @@ namespace ContentManagerDesktopApp
                 if (mainSystem.VerifyLogin(userLoginTextBox.Text, passLoginTextBox.Text) == false)
                 {
                     setMessage("Invalid Login");
+                }
+                else
+                {   
+                    MainPage newPage = new MainPage(mainSystem);
+                    newPage.Show();
                 }
             }
             else if (currentMode == WindowMode.Register)

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using ContentManagerDesktopApp.Forms;
 
 namespace ContentManagerDesktopApp
 {
-    class MainSystem
+    public class MainSystem
     {
         String userDirectory = @"C:\Content Manager\Users";
         private String EncrpytKey = "GWvkrOOvtIyxD9pOfyjs";
@@ -21,6 +22,10 @@ namespace ContentManagerDesktopApp
 
         public bool VerifyLogin(String username, string password)
         {
+            if(username == "Zack" && password == "zack")
+            {
+                return true;
+            }
             return false;
         }
 

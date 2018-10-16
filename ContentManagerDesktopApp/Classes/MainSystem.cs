@@ -12,10 +12,17 @@ namespace ContentManagerDesktopApp
     {
         String userDirectory = @"C:\Content Manager\Users";
         private String EncrpytKey = "GWvkrOOvtIyxD9pOfyjs";
+        public DBConnect mySQLConnect = new DBConnect();
+        string mySQLStatus;
 
         public MainSystem()
         {
+            mySQLStatus = mySQLConnect.message;
 
+            if (!mySQLConnect.OpenConnection())
+            {
+                mySQLStatus = mySQLConnect.message;
+            }
         }
 
         //private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();

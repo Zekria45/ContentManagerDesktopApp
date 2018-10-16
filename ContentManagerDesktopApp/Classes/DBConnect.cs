@@ -1,9 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.IO;
 
@@ -11,7 +8,7 @@ namespace ContentManagerDesktopApp
 {
     // code is based off https://www.codeproject.com/Articles/43438/Connect-C-to-MySQL
 
-    class DBConnect
+    public class DBConnect
     {
         private MySqlConnection connection;
         private string server;
@@ -30,9 +27,9 @@ namespace ContentManagerDesktopApp
         private void Initialize()
         {
             server = "localhost";
-            database = "connectcsharptomysql";
-            uid = "username";
-            password = "password";
+            database = "userdatabasecm";
+            uid = "codeadmin";
+            password = "-password024-";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -41,7 +38,7 @@ namespace ContentManagerDesktopApp
         }
 
         //open connection to database
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
@@ -85,9 +82,11 @@ namespace ContentManagerDesktopApp
         }
 
         //Insert statement
-        public void Insert()
+        public void InsertQuery(string tableName, string columnNames, string columnValues)
         {
-            string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+
+            //string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+            string query = "INSERT INTO " + tableName + " " + columnNames + " VALUES" + columnValues;
 
             //open connection
             if (this.OpenConnection() == true)
@@ -104,6 +103,7 @@ namespace ContentManagerDesktopApp
         }
 
         //Update statement
+        /*
         public void Update()
         {
             string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
@@ -126,6 +126,9 @@ namespace ContentManagerDesktopApp
             }
         }
 
+        */
+
+
         //Delete statement
         public void Delete()
         {
@@ -139,12 +142,70 @@ namespace ContentManagerDesktopApp
             }
         }
 
-        //Select statement
-        public List<string>[] Select()
+        //Check login
+        public User Login(string loginUser, string encryptedPass)
         {
-            string query = "SELECT * FROM tableinfo";
+            string query = "SELECT * FROM logininfo";
+            User nullUser = new User(0, "null", "null");
+
+            if (this.OpenConnection() == true)
+            {
+                string encryptKey = getKey();
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if ((dataReader["username"] == loginUser) && dataReader["encryptpass"] == StringCipher.Encrypt(encryptedPass, encryptKey))
+                    {
+                        int id = Convert.ToInt32(dataReader["id"] + "");
+                        string userName = dataReader["username"] + "";
+                        string passWord = StringCipher.Decrypt((dataReader["id"] + ""), encryptKey);
+                        User createdUser = new User(id, userName, passWord);
+                        return createdUser;
+                    }
+                }
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+            }
+            else
+            {
+                return nullUser;
+            }
+            return nullUser;
+        }
+
+        private string getKey()
+        {
+            string encryptKey = "failed key";
+            string query = "Select encryptkey from systeminfo where id=1";
+
+           
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while(dataReader.Read())
+                {
+                    encryptKey = dataReader["encryptkey"] + "";
+                }
+            }
+            return encryptKey;
+        }
+
+        //Select statement
+        public List<string>[] Select(string tableName)
+        {
+            //string query = "SELECT * FROM tableinfo";
+            string query = "SELECT * FROM " + tableName;
 
             //Create a list to store the result
+            //IDictionary<string, List<string>> dict = new Dictionary<string, List<>>();
             List<string>[] list = new List<string>[3];
             list[0] = new List<string>();
             list[1] = new List<string>();

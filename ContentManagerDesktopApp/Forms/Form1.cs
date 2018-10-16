@@ -67,6 +67,13 @@ namespace ContentManagerDesktopApp
                 {
                     if (mainSystem.CreateUser(userLoginTextBox.Text, passLoginTextBox.Text))
                     {
+                        //('John Smith', '33')
+                        string user = userLoginTextBox.Text;
+                         
+                        //string encryptpass = StringCipher.Encrypt(passLoginTextBox.Text,);
+
+                        string columnValues = "";
+                        mainSystem.mySQLConnect.InsertQuery("logininfo","(username, encryptpass, dateregistered, usertype)", columnValues);
                         switchMode();
                         setMessage("User Created");
                     }

@@ -20,5 +20,12 @@ namespace ContentManagerDesktopApp
             userName = username;
             _password = password;
         }
+
+        public User ()
+        {
+            id = -1;
+            userName = "no user";
+            _password = "no pass";
+        }
     }
 }

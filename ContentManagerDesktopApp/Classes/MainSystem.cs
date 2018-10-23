@@ -14,6 +14,7 @@ namespace ContentManagerDesktopApp
         private String EncrpytKey = "GWvkrOOvtIyxD9pOfyjs";
         public DBConnect mySQLConnect = new DBConnect();
         string mySQLStatus;
+        User mainUser = new User();
 
         public MainSystem()
         {
@@ -29,7 +30,8 @@ namespace ContentManagerDesktopApp
 
         public bool VerifyLogin(String username, string password)
         {
-            if(username == "Zack" && password == "zack")
+            mainUser = mySQLConnect.Login(username, password); 
+            if(!(mainUser.id == -1))
             {
                 return true;
             }

@@ -10,6 +10,8 @@ namespace ContentManagerDesktopApp
 
     public class DBConnect
     {
+        static string failedKey = "failed key";
+
         private MySqlConnection connection;
         private string server;
         private string database;
@@ -146,7 +148,7 @@ namespace ContentManagerDesktopApp
         public User Login(string loginUser, string encryptedPass)
         {
             string query = "SELECT * FROM logininfo";
-            User nullUser = new User(0, "null", "null");
+            User nullUser = new User();
 
             if (this.OpenConnection() == true)
             {
@@ -157,7 +159,7 @@ namespace ContentManagerDesktopApp
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    if ((dataReader["username"] == loginUser) && dataReader["encryptpass"] == StringCipher.Encrypt(encryptedPass, encryptKey))
+                    if (((dataReader["username"] + "") == loginUser) && (dataReader["encryptpass"] + "") == StringCipher.Encrypt(encryptedPass, encryptKey))
                     {
                         int id = Convert.ToInt32(dataReader["id"] + "");
                         string userName = dataReader["username"] + "";
@@ -181,7 +183,7 @@ namespace ContentManagerDesktopApp
 
         private string getKey()
         {
-            string encryptKey = "failed key";
+            string encryptKey = failedKey;
             string query = "Select encryptkey from systeminfo where id=1";
 
            
@@ -194,7 +196,14 @@ namespace ContentManagerDesktopApp
                 {
                     encryptKey = dataReader["encryptkey"] + "";
                 }
+                dataReader.Close();
             }
+            //close Data Reader
+            
+
+            //close Connection
+            this.CloseConnection();
+
             return encryptKey;
         }
 

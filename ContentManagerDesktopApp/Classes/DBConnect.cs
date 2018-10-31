@@ -93,14 +93,22 @@ namespace ContentManagerDesktopApp
             //open connection
             if (this.OpenConnection() == true)
             {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                //Execute command
-                cmd.ExecuteNonQuery();
+                    //Execute command
+                    cmd.ExecuteNonQuery();
 
-                //close connection
-                this.CloseConnection();
+                    //close connection
+                    this.CloseConnection();
+                }
+                catch(Exception ex)
+                {
+                    this.CloseConnection();
+                }
+                
             }
         }
 
@@ -145,27 +153,33 @@ namespace ContentManagerDesktopApp
         }
 
         //Check login
-        public User Login(string loginUser, string encryptedPass)
+        public User Login(string loginUser, string password)
         {
             string query = "SELECT * FROM logininfo";
             User nullUser = new User();
+            string encryptKey = getKey();
+            string encrpyedPass = encryptPass(password);
 
             if (this.OpenConnection() == true)
             {
-                string encryptKey = getKey();
+                
                 //Create Command
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    if (((dataReader["username"] + "") == loginUser) && (dataReader["encryptpass"] + "") == StringCipher.Encrypt(encryptedPass, encryptKey))
+                    string pulledEncPass = dataReader["encryptpass"] + "";
+                    if (((dataReader["username"] + "") == loginUser))
                     {
-                        int id = Convert.ToInt32(dataReader["id"] + "");
-                        string userName = dataReader["username"] + "";
-                        string passWord = StringCipher.Decrypt((dataReader["id"] + ""), encryptKey);
-                        User createdUser = new User(id, userName, passWord);
-                        return createdUser;
+                        if(pulledEncPass == encrpyedPass)
+                        {
+                            int id = Convert.ToInt32(dataReader["id"] + "");
+                            string userName = dataReader["username"] + "";
+                            string passWord = StringCipher.Decrypt((dataReader["id"] + ""), encryptKey);
+                            User createdUser = new User(id, userName, passWord);
+                            return createdUser;
+                        }
                     }
                 }
                 //close Data Reader
@@ -184,27 +198,55 @@ namespace ContentManagerDesktopApp
         private string getKey()
         {
             string encryptKey = failedKey;
-            string query = "Select encryptkey from systeminfo where id=1";
+            string query = "Select encryptkey from systeminfo where idsysteminfo=1";
 
-           
+            
             if (this.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while(dataReader.Read())
+                try
                 {
-                    encryptKey = dataReader["encryptkey"] + "";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    //Create a data reader and Execute the command
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        encryptKey = dataReader["encryptkey"] + "";
+                    }
+                    //close Data Reader
+                    dataReader.Close();
                 }
-                dataReader.Close();
+                catch(Exception ex)
+                {
+                    this.CloseConnection();
+                }
+                this.CloseConnection();
             }
-            //close Data Reader
-            
-
             //close Connection
-            this.CloseConnection();
-
             return encryptKey;
+        }
+
+        public string encryptPass(string rawPass)
+        {
+            try
+            {
+                return StringCipher.Encrypt(rawPass,getKey());
+            }
+            catch(Exception ex)
+            {
+                return rawPass;
+            }
+        }
+
+        public string decryptPass(string encPass)
+        {
+            try
+            {
+                return StringCipher.Decrypt(encPass, getKey());
+            }
+            catch(Exception ex)
+            {
+                return encPass;
+            }
         }
 
         //Select statement

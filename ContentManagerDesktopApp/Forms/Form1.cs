@@ -65,17 +65,21 @@ namespace ContentManagerDesktopApp
             {
                 if (passLoginTextBox.Text == passLoginTextBoxConfirm.Text)
                 {
-                    if (mainSystem.CreateUser(userLoginTextBox.Text, passLoginTextBox.Text))
+                    if(mainSystem.ValidPassword(passLoginTextBox.Text))
                     {
-                        //('John Smith', '33')
-                        string user = userLoginTextBox.Text;
-                         
-                        //string encryptpass = StringCipher.Encrypt(passLoginTextBox.Text,);
-
-                        string columnValues = "";
-                        mainSystem.mySQLConnect.InsertQuery("logininfo","(username, encryptpass, dateregistered, usertype)", columnValues);
-                        switchMode();
-                        setMessage("User Created");
+                        if (mainSystem.CreateUser(userLoginTextBox.Text, passLoginTextBox.Text))
+                        {
+                            switchMode();
+                            setMessage("User Created");
+                        }
+                        else
+                        {
+                            setMessage("Failed to create user");
+                        }
+                    }
+                    else
+                    {
+                        setMessage("Must have upper/lower case and more than 5 characters.");
                     }
                 }
                 else
@@ -88,7 +92,6 @@ namespace ContentManagerDesktopApp
             {
                 setMessage("Unkown Bug");
             }
-
         }
 
         private void userLoginTextBox_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace ContentManagerDesktopApp
         String userDirectory = @"C:\Content Manager\Users";
         public DBConnect mySQLConnect = new DBConnect();
         string mySQLStatus;
-        User mainUser = new User();
+        public User mainUser = new User();
 
         public MainSystem()
         {
@@ -26,7 +26,8 @@ namespace ContentManagerDesktopApp
         {
             mainUser = mySQLConnect.Login(username, password); 
             if(!(mainUser.id == -1))
-            { 
+            {
+                mainUser.LogIn();
                 return true;
             }
             return false;

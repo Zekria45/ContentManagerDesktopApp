@@ -39,6 +39,7 @@
             this.usernameLabel = new System.Windows.Forms.Label();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.logOutLabel = new System.Windows.Forms.LinkLabel();
+            this.mainUIPanel = new System.Windows.Forms.Panel();
             this.ButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.TopPanel.SuspendLayout();
@@ -166,11 +167,20 @@
             this.logOutLabel.Text = "Log Out";
             this.logOutLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.logOutLabel_LinkClicked);
             // 
+            // mainUIPanel
+            // 
+            this.mainUIPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainUIPanel.Location = new System.Drawing.Point(200, 67);
+            this.mainUIPanel.Name = "mainUIPanel";
+            this.mainUIPanel.Size = new System.Drawing.Size(984, 614);
+            this.mainUIPanel.TabIndex = 2;
+            // 
             // MainPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.mainUIPanel);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.ButtonPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -200,5 +210,6 @@
         private System.Windows.Forms.LinkLabel logOutLabel;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Button userButton;
+        private System.Windows.Forms.Panel mainUIPanel;
     }
 }

@@ -59,6 +59,8 @@ namespace ContentManagerDesktopApp
                 {   
                     MainPage newPage = new MainPage(mainSystem);
                     newPage.Show();
+                    this.Hide();
+
                 }
             }
             else if (currentMode == WindowMode.Register)

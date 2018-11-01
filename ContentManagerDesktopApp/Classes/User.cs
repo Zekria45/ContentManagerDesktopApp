@@ -13,8 +13,7 @@ namespace ContentManagerDesktopApp
         public String userName;
         private String _password;
         public int id;
-        public bool loggedIn = false;
-        public bool validUser = false;
+        private bool _loggedIn = false;
 
         public User (int currentID, string username, string password)
         {
@@ -29,5 +28,17 @@ namespace ContentManagerDesktopApp
             userName = "no user";
             _password = "no pass";
         }
+
+        public void LogIn()
+        {
+            _loggedIn = true;
+        }
+
+        public void LogOut()
+        {
+            _loggedIn = false;
+        }
+        
+        
     }
 }

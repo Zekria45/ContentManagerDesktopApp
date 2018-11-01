@@ -158,11 +158,10 @@ namespace ContentManagerDesktopApp
             string query = "SELECT * FROM logininfo";
             User nullUser = new User();
             string encryptKey = getKey();
-            string encrpyedPass = encryptPass(password);
+            //string encrpyedPass = encryptPass(password);
 
             if (this.OpenConnection() == true)
             {
-                
                 //Create Command
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
@@ -170,14 +169,17 @@ namespace ContentManagerDesktopApp
                 while (dataReader.Read())
                 {
                     string pulledEncPass = dataReader["encryptpass"] + "";
+                    string rawPass = StringCipher.Decrypt(pulledEncPass,encryptKey);
                     if (((dataReader["username"] + "") == loginUser))
                     {
-                        if(pulledEncPass == encrpyedPass)
+                        if(password == rawPass)
                         {
-                            int id = Convert.ToInt32(dataReader["id"] + "");
+                            int id = Convert.ToInt32(dataReader["iduser"] + "");
                             string userName = dataReader["username"] + "";
-                            string passWord = StringCipher.Decrypt((dataReader["id"] + ""), encryptKey);
+                            string passWord = rawPass;
                             User createdUser = new User(id, userName, passWord);
+                            dataReader.Close();
+                            this.CloseConnection();
                             return createdUser;
                         }
                     }

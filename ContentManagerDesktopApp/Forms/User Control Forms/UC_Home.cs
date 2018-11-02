@@ -16,5 +16,33 @@ namespace ContentManagerDesktopApp
         {
             InitializeComponent();
         }
+
+        private void UC_Home_Load(object sender, EventArgs e)
+        {
+            listViewProperties();
+
+        }
+
+        private void listViewProperties()
+        {
+            imageList.View = View.Details;
+            imageList.Columns.Add("Images",188);
+            imageList.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void populateImageList()
+        {
+            ImageList listOfImages = new ImageList();
+            listOfImages.ImageSize = new Size(160,160);
+
+            try
+            {
+                // populate image list
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

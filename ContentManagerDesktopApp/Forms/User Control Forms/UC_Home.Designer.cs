@@ -28,34 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.displayPicture = new System.Windows.Forms.PictureBox();
-            this.commentBox = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Home));
             this.contentHistoryLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.displayPicture)).BeginInit();
+            this.mainPictureBox = new System.Windows.Forms.PictureBox();
+            this.commentBox = new System.Windows.Forms.TextBox();
+            this.imageList = new System.Windows.Forms.ListView();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // displayPicture
-            // 
-            this.displayPicture.Location = new System.Drawing.Point(564, 74);
-            this.displayPicture.Name = "displayPicture";
-            this.displayPicture.Size = new System.Drawing.Size(337, 309);
-            this.displayPicture.TabIndex = 1;
-            this.displayPicture.TabStop = false;
-            // 
-            // commentBox
-            // 
-            this.commentBox.Location = new System.Drawing.Point(564, 411);
-            this.commentBox.Multiline = true;
-            this.commentBox.Name = "commentBox";
-            this.commentBox.Size = new System.Drawing.Size(337, 107);
-            this.commentBox.TabIndex = 2;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // contentHistoryLabel
             // 
@@ -69,27 +48,55 @@
             this.contentHistoryLabel.TabIndex = 4;
             this.contentHistoryLabel.Text = "Content History";
             // 
+            // mainPictureBox
+            // 
+            this.mainPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("mainPictureBox.Image")));
+            this.mainPictureBox.Location = new System.Drawing.Point(532, 93);
+            this.mainPictureBox.Name = "mainPictureBox";
+            this.mainPictureBox.Size = new System.Drawing.Size(365, 312);
+            this.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.mainPictureBox.TabIndex = 5;
+            this.mainPictureBox.TabStop = false;
+            // 
+            // commentBox
+            // 
+            this.commentBox.Location = new System.Drawing.Point(532, 438);
+            this.commentBox.Multiline = true;
+            this.commentBox.Name = "commentBox";
+            this.commentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.commentBox.Size = new System.Drawing.Size(365, 88);
+            this.commentBox.TabIndex = 6;
+            this.commentBox.Text = "No text";
+            // 
+            // imageList
+            // 
+            this.imageList.Location = new System.Drawing.Point(60, 93);
+            this.imageList.Name = "imageList";
+            this.imageList.Size = new System.Drawing.Size(376, 433);
+            this.imageList.TabIndex = 7;
+            this.imageList.UseCompatibleStateImageBehavior = false;
+            // 
             // UC_Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.contentHistoryLabel);
+            this.Controls.Add(this.imageList);
             this.Controls.Add(this.commentBox);
-            this.Controls.Add(this.displayPicture);
+            this.Controls.Add(this.mainPictureBox);
+            this.Controls.Add(this.contentHistoryLabel);
             this.Name = "UC_Home";
             this.Size = new System.Drawing.Size(984, 614);
-            ((System.ComponentModel.ISupportInitialize)(this.displayPicture)).EndInit();
+            this.Load += new System.EventHandler(this.UC_Home_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox displayPicture;
-        private System.Windows.Forms.TextBox commentBox;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label contentHistoryLabel;
+        private System.Windows.Forms.PictureBox mainPictureBox;
+        private System.Windows.Forms.TextBox commentBox;
+        private System.Windows.Forms.ListView imageList;
     }
 }

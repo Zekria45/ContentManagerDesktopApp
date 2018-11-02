@@ -13,6 +13,9 @@ namespace ContentManagerDesktopApp.Forms
 {
     public partial class MainPage : Form
     {
+        UC_Home hControl = new UC_Home();
+
+
         public MainPage(MainSystem mainSystem)
         {
             InitializeComponent();
@@ -20,7 +23,7 @@ namespace ContentManagerDesktopApp.Forms
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-
+            addControlToPanel(hControl);
         }
 
         public void moveSidePanel(Control pressedButton)
@@ -39,8 +42,7 @@ namespace ContentManagerDesktopApp.Forms
         private void homeButton_Click(object sender, EventArgs e)
         {
             moveSidePanel(homeButton);
-            UC_Home uControl = new UC_Home();
-            addControlToPanel(uControl);
+            addControlToPanel(hControl);
         }
 
         private void userButton_Click(object sender, EventArgs e)

@@ -14,7 +14,7 @@ namespace ContentManagerDesktopApp.Forms
     public partial class MainPage : Form
     {
         UC_Home hControl = new UC_Home();
-
+        DropBoxAccess dbAccess = new DropBoxAccess();
 
         public MainPage(MainSystem mainSystem)
         {

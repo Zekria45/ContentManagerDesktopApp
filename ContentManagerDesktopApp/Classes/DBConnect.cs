@@ -112,31 +112,7 @@ namespace ContentManagerDesktopApp
             }
         }
 
-        //Update statement
-        /*
-        public void Update()
-        {
-            string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //create mysql command
-                MySqlCommand cmd = new MySqlCommand();
-                //Assign the query using CommandText
-                cmd.CommandText = query;
-                //Assign the connection using Connection
-                cmd.Connection = connection;
-
-                //Execute query
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                this.CloseConnection();
-            }
-        }
-
-        */
+        
 
 
         //Delete statement
@@ -157,7 +133,7 @@ namespace ContentManagerDesktopApp
         {
             string query = "SELECT * FROM logininfo";
             User nullUser = new User();
-            string encryptKey = getKey();
+            string encryptKey = getSysInfo("encryptkey");// encryptkey
             //string encrpyedPass = encryptPass(password);
 
             if (this.OpenConnection() == true)
@@ -197,10 +173,11 @@ namespace ContentManagerDesktopApp
             return nullUser;
         }
 
-        private string getKey()
+        private string getSysInfo(string valueToPull)
         {
             string encryptKey = failedKey;
-            string query = "Select encryptkey from systeminfo where idsysteminfo=1";
+            //string query = "Select encryptkey from systeminfo where idsysteminfo=1";
+            string query = "Select " + valueToPull + " from systeminfo where idsysteminfo=1";
 
             
             if (this.OpenConnection() == true)
@@ -231,7 +208,7 @@ namespace ContentManagerDesktopApp
         {
             try
             {
-                return StringCipher.Encrypt(rawPass,getKey());
+                return StringCipher.Encrypt(rawPass, getSysInfo("encryptkey"));
             }
             catch(Exception ex)
             {
@@ -243,7 +220,7 @@ namespace ContentManagerDesktopApp
         {
             try
             {
-                return StringCipher.Decrypt(encPass, getKey());
+                return StringCipher.Decrypt(encPass, getSysInfo("encryptkey"));
             }
             catch(Exception ex)
             {

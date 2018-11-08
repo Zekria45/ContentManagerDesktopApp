@@ -4,25 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dropbox.Api;
-//4.6.1 .Net
 
 namespace ContentManagerDesktopApp
 {
     class DropBoxAccess
     {
-        private static string tokens = "o_IbVJupIAAAAAAAAAAAUJHPZUp68RpGBl7jlfXpAmQI84BU7tZVwjsBOE85E0AK";
-        
-        
+        static string token = "token-here";
+
         public DropBoxAccess()
         {
-            var task = Task.Run((Func<Task>)Program.Run);
+            var task = Task.Run((Func<Task>)DropBoxAccess.Run);
+            task.Wait();
         }
 
-        static async Task Run(string token)
+        static async Task Run()
         {
-            using (var dbx = new DropboxClient(tokens))
+            using (var dbx = new DropboxClient(token))
             {
+                var list = await dbx.Files.ListFolderAsync(string.Empty);
+                foreach (var item in list.Entries.Where(i => i.IsFolder))
+                {
+                    Console.WriteLine("D  {0}/", item.Name);
+                }
 
+                foreach (var item in list.Entries.Where(i => i.IsFile))
+                {
+                    Console.WriteLine("F{0,8} {1}", item.AsFile.Size, item.Name);
+                }
             }
         }
     }

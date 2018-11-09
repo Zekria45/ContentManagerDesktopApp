@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             this.ButtonPanel = new System.Windows.Forms.Panel();
             this.settingsButton = new System.Windows.Forms.Button();
-            this.userButton = new System.Windows.Forms.Button();
             this.sidePanel = new System.Windows.Forms.Panel();
             this.homeButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,7 +48,6 @@
             // 
             this.ButtonPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ButtonPanel.Controls.Add(this.settingsButton);
-            this.ButtonPanel.Controls.Add(this.userButton);
             this.ButtonPanel.Controls.Add(this.sidePanel);
             this.ButtonPanel.Controls.Add(this.homeButton);
             this.ButtonPanel.Controls.Add(this.pictureBox1);
@@ -65,7 +63,7 @@
             this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsButton.Image = ((System.Drawing.Image)(resources.GetObject("settingsButton.Image")));
             this.settingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.settingsButton.Location = new System.Drawing.Point(12, 276);
+            this.settingsButton.Location = new System.Drawing.Point(12, 209);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(188, 68);
             this.settingsButton.TabIndex = 4;
@@ -73,21 +71,6 @@
             this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
-            // 
-            // userButton
-            // 
-            this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
-            this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(12, 209);
-            this.userButton.Name = "userButton";
-            this.userButton.Size = new System.Drawing.Size(188, 68);
-            this.userButton.TabIndex = 3;
-            this.userButton.Text = " User";
-            this.userButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.userButton.UseVisualStyleBackColor = true;
-            this.userButton.Click += new System.EventHandler(this.userButton_Click);
             // 
             // sidePanel
             // 
@@ -209,7 +192,6 @@
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.LinkLabel logOutLabel;
         private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.Button userButton;
         private System.Windows.Forms.Panel mainUIPanel;
     }
 }

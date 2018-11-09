@@ -13,12 +13,19 @@ namespace ContentManagerDesktopApp.Forms
 {
     public partial class MainPage : Form
     {
-        UC_Home hControl = new UC_Home();
-        DropBoxAccess dbAccess = new DropBoxAccess();
 
-        public MainPage(MainSystem mainSystem)
+        MainSystem mainSystem = new MainSystem();
+        // creating all panels
+        UC_Home hControl;
+        UC_Settings sControl;
+
+
+        public MainPage(MainSystem mainSys)
         {
             InitializeComponent();
+            mainSystem = mainSys;
+            hControl = new UC_Home();
+            sControl = new UC_Settings(mainSystem);
         }
 
         private void MainPage_Load(object sender, EventArgs e)
@@ -45,14 +52,10 @@ namespace ContentManagerDesktopApp.Forms
             addControlToPanel(hControl);
         }
 
-        private void userButton_Click(object sender, EventArgs e)
-        {
-            moveSidePanel(userButton);
-        }
-
         private void settingsButton_Click(object sender, EventArgs e)
         {
             moveSidePanel(settingsButton);
+            addControlToPanel(sControl);
         }
 
         private void logOutLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

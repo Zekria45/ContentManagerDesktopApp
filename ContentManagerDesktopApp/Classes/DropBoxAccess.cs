@@ -16,29 +16,32 @@ namespace ContentManagerDesktopApp
 
     class DropBoxAccess
     {
-        static string token = "o_IbVJupIAAAAAAAAAAAUTdQwuc5WOzmcmUMTPrMkLzPbC96yQJYdebltWrdIulL";
+        
+        public GlobalVariables.DropBoxStatus dBoxStatus = GlobalVariables.DropBoxStatus.NotCreated;
 
-        public DropBoxAccess()
+        private string token = "";
+        DropboxClient client;
+
+        public DropBoxAccess(string tokenToUse)
         {
-            //var task = Task.Run((Func<Task>)DropBoxAccess.Run);
-            //task.Wait();
+            token = tokenToUse;
+            client = new DropboxClient(token);
         }
+        
 
-        static async Task Run()
-        {
-            
-        }
 
-        private async Task<FolderMetadata> CreateFolder(DropboxClient client, string path)
+        public async Task<FolderMetadata> CreateFolder(string path) //DropboxClient client, 
         {
+            dBoxStatus = GlobalVariables.DropBoxStatus.Creating;
             var folderArg = new CreateFolderArg(path);
             var folder = await client.Files.CreateFolderV2Async(folderArg);
             Console.WriteLine("Folder: " + path + " created!");
+            dBoxStatus = GlobalVariables.DropBoxStatus.Created;
 
             return folder.Metadata;
         }
 
-        private async Task<ListFolderResult> ListFolder(DropboxClient client, string path)
+        public async Task<ListFolderResult> ListFolder(string path)
         {
             Console.WriteLine("--- Files ---");
             var list = await client.Files.ListFolderAsync(path);
@@ -65,7 +68,7 @@ namespace ContentManagerDesktopApp
             return list;
         }
 
-        private async Task Download(DropboxClient client, string folder, FileMetadata file)
+        public async Task Download(string folder, FileMetadata file) //DropboxClient client,
         {
             Console.WriteLine("Download file...");
 
@@ -78,7 +81,7 @@ namespace ContentManagerDesktopApp
             }
         }
 
-        private async Task Upload(DropboxClient client, string folder, string fileName, string fileContent)
+        public async Task Upload(string folder, string fileName, string fileContent)//DropboxClient client, 
         {
             Console.WriteLine("Upload file...");
 
@@ -89,5 +92,6 @@ namespace ContentManagerDesktopApp
                 Console.WriteLine("Uploaded Id {0} Rev {1}", response.Id, response.Rev);
             }
         }
+        
     }
 }

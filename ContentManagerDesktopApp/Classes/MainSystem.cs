@@ -5,23 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using ContentManagerDesktopApp.Forms;
+using Dropbox.Api;
 
 namespace ContentManagerDesktopApp
 {
     public class MainSystem
     {
+
         String userDirectory = @"C:\Content Manager\Users";
         public DBConnect mySQLConnect = new DBConnect();
-        DropBoxAccess dbAccess = new DropBoxAccess();
+        DropBoxAccess dbAccess; // dropbox access
         string mySQLStatus;
         public User mainUser = new User();
 
         public MainSystem()
         {
             mySQLStatus = mySQLConnect.message;
+            if (!initDropBox())
+            {
+                dbAccess = new DropBoxAccess("");
+            }
         }
-
-        //private Dictionary<string, Users> CollectionOfusers = new Dictionary<string, Users>();
+        
 
         public bool VerifyLogin(String username, string password)
         {
@@ -29,11 +34,14 @@ namespace ContentManagerDesktopApp
             if(!(mainUser.id == -1))
             {
                 mainUser.LogIn();
+                string directoryValue = "/Users/" + username;
+                createFolder(directoryValue); // creating dropbox folder if not already made
                 return true;
             }
             return false;
         }
 
+        // creates user in mySQL
         public bool CreateUser(string username, string password)
         {
             try
@@ -51,10 +59,12 @@ namespace ContentManagerDesktopApp
                 valueList.Add(User.UserType.user.ToString());
 
                 string columnValues = sqlCommandBuilder(valueList);
-                //((DateTime)newsItem).ToString(@"yyyy-MM-dd");
-                
 
                 mySQLConnect.InsertQuery("logininfo", "(username, encryptpass, dateregistered, usertype)", columnValues);
+
+                string directoryValue = "/Users/" + username;
+                createFolder(directoryValue); // creating dropbox folder
+
 
                 return true;
             }
@@ -107,6 +117,7 @@ namespace ContentManagerDesktopApp
             }
         }
 
+        // checks if valid password
         public bool ValidPassword(string password)
         {
             if((password.Length > 5)&&(password.Length < 15))
@@ -125,6 +136,7 @@ namespace ContentManagerDesktopApp
             string lastString = valueList[valueList.Count - 1];
             string sQ = '\''.ToString(); //single quote required to format string
 
+            // format of the string
             //('John Smith', '33', 'No')
             string command = "";
 
@@ -145,9 +157,66 @@ namespace ContentManagerDesktopApp
                 }
                 i++;
             }
-
             return command;
         }
+
+        private bool initDropBox()
+        {
+            try
+            {
+                string tokenValue = mySQLConnect.getToken();
+                dbAccess = new DropBoxAccess(tokenValue);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /*
+        
+
+        */
+        public bool createFolder(string path) // create folder for dropbox
+        {
+            try
+            {
+                var task = dbAccess.CreateFolder(path);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool checkExistingFolder(string path)
+        {
+            try
+            {
+                var task = dbAccess.ListFolder(path);
+                task.Wait();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return false;
+        }
+
+        public GlobalVariables.DropBoxStatus getDropBoxStatus()
+        {
+            return dbAccess.dBoxStatus;
+        }
+
+        public void setDropBoxStatus(GlobalVariables.DropBoxStatus status)
+        {
+            dbAccess.dBoxStatus = status;
+        }
+
+        
 
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 namespace ContentManagerDesktopApp
 {
     // code is based off https://www.codeproject.com/Articles/43438/Connect-C-to-MySQL
+    // database connect
 
     public class DBConnect
     {
@@ -86,8 +87,8 @@ namespace ContentManagerDesktopApp
         //Insert statement
         public void InsertQuery(string tableName, string columnNames, string columnValues)
         {
-
-            //string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+            // example of query
+            //"INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
             string query = "INSERT INTO " + tableName + " " + columnNames + " VALUES" + columnValues;
 
             //open connection
@@ -109,22 +110,6 @@ namespace ContentManagerDesktopApp
                     this.CloseConnection();
                 }
                 
-            }
-        }
-
-        
-
-
-        //Delete statement
-        public void Delete()
-        {
-            string query = "DELETE FROM tableinfo WHERE name='John Smith'";
-
-            if (this.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
             }
         }
 
@@ -175,7 +160,7 @@ namespace ContentManagerDesktopApp
 
         private string getSysInfo(string valueToPull)
         {
-            string encryptKey = failedKey;
+            string systemValue = failedKey;
             //string query = "Select encryptkey from systeminfo where idsysteminfo=1";
             string query = "Select " + valueToPull + " from systeminfo where idsysteminfo=1";
 
@@ -189,7 +174,7 @@ namespace ContentManagerDesktopApp
                     MySqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        encryptKey = dataReader["encryptkey"] + "";
+                        systemValue = dataReader[valueToPull] + "";
                     }
                     //close Data Reader
                     dataReader.Close();
@@ -201,7 +186,23 @@ namespace ContentManagerDesktopApp
                 this.CloseConnection();
             }
             //close Connection
-            return encryptKey;
+            return systemValue;
+        }
+
+        public string getToken()
+        {
+            string tokenValue = "";
+            try
+            {
+                tokenValue = getSysInfo("dropboxtoken");
+                return tokenValue;
+            }
+            catch(Exception ex)
+            {
+                return tokenValue;
+            }
+
+            
         }
 
         public string encryptPass(string rawPass)
@@ -225,153 +226,6 @@ namespace ContentManagerDesktopApp
             catch(Exception ex)
             {
                 return encPass;
-            }
-        }
-
-        //Select statement
-        public List<string>[] Select(string tableName)
-        {
-            //string query = "SELECT * FROM tableinfo";
-            string query = "SELECT * FROM " + tableName;
-
-            //Create a list to store the result
-            //IDictionary<string, List<string>> dict = new Dictionary<string, List<>>();
-            List<string>[] list = new List<string>[3];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-            list[2] = new List<string>();
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["name"] + "");
-                    list[2].Add(dataReader["age"] + "");
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
-                //return list to be displayed
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-        }
-
-        //Count statement
-        public int Count()
-        {
-            string query = "SELECT Count(*) FROM tableinfo";
-            int Count = -1;
-
-            //Open Connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Mysql Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                //ExecuteScalar will return one value
-                Count = int.Parse(cmd.ExecuteScalar() + "");
-
-                //close Connection
-                this.CloseConnection();
-
-                return Count;
-            }
-            else
-            {
-                return Count;
-            }
-        }
-
-        //Backup
-        public void Backup()
-        {
-            try
-            {
-                DateTime Time = DateTime.Now;
-                int year = Time.Year;
-                int month = Time.Month;
-                int day = Time.Day;
-                int hour = Time.Hour;
-                int minute = Time.Minute;
-                int second = Time.Second;
-                int millisecond = Time.Millisecond;
-
-                //Save file to C:\ with the current date as a filename
-                string path;
-                path = "C:\\MySqlBackup" + year + "-" + month + "-" + day +
-            "-" + hour + "-" + minute + "-" + second + "-" + millisecond + ".sql";
-                StreamWriter file = new StreamWriter(path);
-
-
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = "mysqldump";
-                psi.RedirectStandardInput = false;
-                psi.RedirectStandardOutput = true;
-                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}",
-                    uid, password, server, database);
-                psi.UseShellExecute = false;
-
-                Process process = Process.Start(psi);
-
-                string output;
-                output = process.StandardOutput.ReadToEnd();
-                file.WriteLine(output);
-                process.WaitForExit();
-                file.Close();
-                process.Close();
-            }
-            catch (IOException ex)
-            {
-                message = "Error , unable to backup!";
-            }
-        }
-
-        //Restore
-        public void Restore()
-        {
-            try
-            {
-                //Read file from C:\
-                string path;
-                path = "C:\\MySqlBackup.sql";
-                StreamReader file = new StreamReader(path);
-                string input = file.ReadToEnd();
-                file.Close();
-
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = "mysql";
-                psi.RedirectStandardInput = true;
-                psi.RedirectStandardOutput = false;
-                psi.Arguments = string.Format(@"-u{0} -p{1} -h{2} {3}",
-                    uid, password, server, database);
-                psi.UseShellExecute = false;
-
-
-                Process process = Process.Start(psi);
-                process.StandardInput.WriteLine(input);
-                process.StandardInput.Close();
-                process.WaitForExit();
-                process.Close();
-            }
-            catch (IOException ex)
-            {
-                message = "Error , unable to Restore!";
             }
         }
     }

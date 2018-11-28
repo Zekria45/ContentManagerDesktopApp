@@ -24,7 +24,7 @@ namespace ContentManagerDesktopApp
 
         public User ()
         {
-            id = -1;
+            id = -1; // -1 is invalid user
             userName = "no user";
             _password = "no pass";
         }

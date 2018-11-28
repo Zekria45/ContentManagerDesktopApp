@@ -24,6 +24,7 @@ namespace ContentManagerDesktopApp.Forms
         {
             InitializeComponent();
             mainSystem = mainSys;
+            userNameLabel.Text = mainSystem.mainUser.userName;
             hControl = new UC_Home();
             sControl = new UC_Settings(mainSystem);
         }

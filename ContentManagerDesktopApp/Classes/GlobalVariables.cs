@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace ContentManagerDesktopApp
 {
-    public static class GlobalVariables
+    public class GlobalVariables
     {
-        public static string loginInfoTable = "logininfo";
-        public static string systemInfoTable = "systeminfo";
-        public static string imageReferenceTable = "imagereference";
-        public static string commentReferenceTable = "commentreference";
-        public static string commentContentTable = "commentcontent";
-
+        public enum DropBoxStatus { NotCreated, Creating, Created };
     }
 }

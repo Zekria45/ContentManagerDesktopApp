@@ -35,7 +35,7 @@
             this.homeButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TopPanel = new System.Windows.Forms.Panel();
-            this.usernameLabel = new System.Windows.Forms.Label();
+            this.userNameLabel = new System.Windows.Forms.Label();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.logOutLabel = new System.Windows.Forms.LinkLabel();
             this.mainUIPanel = new System.Windows.Forms.Panel();
@@ -108,7 +108,7 @@
             // TopPanel
             // 
             this.TopPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.TopPanel.Controls.Add(this.usernameLabel);
+            this.TopPanel.Controls.Add(this.userNameLabel);
             this.TopPanel.Controls.Add(this.welcomeLabel);
             this.TopPanel.Controls.Add(this.logOutLabel);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -117,15 +117,15 @@
             this.TopPanel.Size = new System.Drawing.Size(984, 67);
             this.TopPanel.TabIndex = 1;
             // 
-            // usernameLabel
+            // userNameLabel
             // 
-            this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLabel.Location = new System.Drawing.Point(137, 20);
-            this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(120, 29);
-            this.usernameLabel.TabIndex = 2;
-            this.usernameLabel.Text = "username";
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.Location = new System.Drawing.Point(137, 20);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(120, 29);
+            this.userNameLabel.TabIndex = 2;
+            this.userNameLabel.Text = "username";
             // 
             // welcomeLabel
             // 
@@ -188,7 +188,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel sidePanel;
         private System.Windows.Forms.Button homeButton;
-        private System.Windows.Forms.Label usernameLabel;
+        private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.LinkLabel logOutLabel;
         private System.Windows.Forms.Button settingsButton;

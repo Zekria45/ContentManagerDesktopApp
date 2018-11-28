@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.settingsLabel = new System.Windows.Forms.Label();
-            this.configDBButton = new System.Windows.Forms.Button();
             this.dropBoxStatLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -44,21 +43,6 @@
             this.settingsLabel.Size = new System.Drawing.Size(197, 55);
             this.settingsLabel.TabIndex = 5;
             this.settingsLabel.Text = "Settings";
-            // 
-            // configDBButton
-            // 
-            this.configDBButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.configDBButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.configDBButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.configDBButton.ForeColor = System.Drawing.Color.Black;
-            this.configDBButton.Location = new System.Drawing.Point(63, 176);
-            this.configDBButton.Name = "configDBButton";
-            this.configDBButton.Size = new System.Drawing.Size(140, 51);
-            this.configDBButton.TabIndex = 6;
-            this.configDBButton.Text = "Configure";
-            this.configDBButton.UseVisualStyleBackColor = false;
-            this.configDBButton.Click += new System.EventHandler(this.configDBButton_Click);
             // 
             // dropBoxStatLabel
             // 
@@ -77,7 +61,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.dropBoxStatLabel);
-            this.Controls.Add(this.configDBButton);
             this.Controls.Add(this.settingsLabel);
             this.Name = "UC_Settings";
             this.Size = new System.Drawing.Size(984, 614);
@@ -89,7 +72,6 @@
         #endregion
 
         private System.Windows.Forms.Label settingsLabel;
-        private System.Windows.Forms.Button configDBButton;
         private System.Windows.Forms.Label dropBoxStatLabel;
     }
 }

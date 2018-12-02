@@ -68,17 +68,50 @@ namespace ContentManagerDesktopApp
             return list;
         }
 
-        public async Task Download(string folder, FileMetadata file) //DropboxClient client,
+        // folder is folder in dropbox, file is the file in dropbox, directory is where you want it downloaded on local machine
+        public async Task Download(string folder, string file, string directory)
         {
-            Console.WriteLine("Download file...");
-
-            using (var response = await client.Files.DownloadAsync(folder + "/" + file.Name))
+            string localFilePath = directory;//@"C:\Content Manager\Users\" + name;
+            using (var response = await client.Files.DownloadAsync("/" + folder + "/" + file))
             {
-                Console.WriteLine("Downloaded {0} Rev {1}", response.Response.Name, response.Response.Rev);
-                Console.WriteLine("------------------------------");
-                Console.WriteLine(await response.GetContentAsStringAsync());
-                Console.WriteLine("------------------------------");
+                using (var fileStream = File.Create(localFilePath))
+                {
+                    (await response.GetContentAsStreamAsync()).CopyTo(fileStream);
+
+                }
             }
+        }
+        
+        // downloads all files in a dropbox folder
+        // path is path in dropbox, directory is directory on local machine
+        public async Task DownloadAll(string path, string directory)
+        {
+            try
+            {
+                var list = await client.Files.ListFolderAsync(path);
+
+                foreach (var item in list.Entries.Where(i => i.IsFile)) // populating list of files(pictures)
+                {
+                    var file = item.AsFile;
+                    string fileName = file.Name;
+
+                    using (var response = await client.Files.DownloadAsync(path + "/" + fileName))
+                    {
+                        string nameDirectory = directory + "\\Pictures\\" + file.Name;
+                        //using (var fileStream = File.Create(directory))
+                        using (var fileStream = File.OpenWrite(nameDirectory))//directory
+                        {
+                            (await response.GetContentAsStreamAsync()).CopyTo(fileStream);
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                // do nothing
+            }
+            
+
         }
 
         public async Task Upload(string folder, string fileName, string fileContent)//DropboxClient client, 

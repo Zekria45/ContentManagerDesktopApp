@@ -34,8 +34,10 @@ namespace ContentManagerDesktopApp
             if(!(mainUser.id == -1))
             {
                 mainUser.LogIn();
-                string directoryValue = "/Users/" + username;
-                createFolder(directoryValue); // creating dropbox folder if not already made
+                string dropBoxPath = "/Users/" + username;
+                createFolder(dropBoxPath); // creating dropbox folder if not already made
+                string localMachinePath = userDirectory + "\\" + username;
+                downloadImages(dropBoxPath, localMachinePath);//string path, string directory
                 return true;
             }
             return false;
@@ -65,6 +67,7 @@ namespace ContentManagerDesktopApp
                 string directoryValue = "/Users/" + username;
                 createFolder(directoryValue); // creating dropbox folder
 
+                CreateUserDirectory(username, tryEncPass);
 
                 return true;
             }
@@ -74,6 +77,7 @@ namespace ContentManagerDesktopApp
             }
         }
         
+        //create user folder on local machine
         public bool CreateUserDirectory(string username, string password)
         {
             string fullDirectory = Path.Combine(userDirectory,username);
@@ -82,6 +86,7 @@ namespace ContentManagerDesktopApp
                 if (!Directory.Exists(fullDirectory))
                 {
                     Directory.CreateDirectory(fullDirectory);
+                    Directory.CreateDirectory(fullDirectory + "\\Pictures");
                 }
                 string fileName = username + "EncrpytData.txt";
                 string fileNameLocation = Path.Combine(fullDirectory,fileName);
@@ -89,8 +94,7 @@ namespace ContentManagerDesktopApp
                 {
                     StreamWriter newFile = new StreamWriter(fileNameLocation);
                     newFile.WriteLine(username + "\n");
-                    //string encryptedPass = StringCipher.Encrypt(password, EncrpytKey);
-                    //newFile.Write(encryptedPass);
+                    newFile.WriteLine(password + "\n");
                     newFile.Close();
 
                 }
@@ -102,6 +106,7 @@ namespace ContentManagerDesktopApp
             }
         }
 
+        //creates initial folder in local machine
         private void CreateInitialDirectory()
         {
             try
@@ -204,6 +209,19 @@ namespace ContentManagerDesktopApp
             }
 
             return false;
+        }
+
+        public bool downloadImages(string path, string directory)
+        {
+            try
+            {
+                var task = dbAccess.DownloadAll(path, directory);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
         public GlobalVariables.DropBoxStatus getDropBoxStatus()

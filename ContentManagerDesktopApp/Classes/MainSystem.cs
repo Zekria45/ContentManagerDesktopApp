@@ -12,7 +12,7 @@ namespace ContentManagerDesktopApp
     public class MainSystem
     {
 
-        String userDirectory = @"C:\Content Manager\Users";
+        public String userDirectory = @"C:\Content Manager\Users";
         public DBConnect mySQLConnect = new DBConnect();
         DropBoxAccess dbAccess; // dropbox access
         string mySQLStatus;

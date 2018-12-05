@@ -29,7 +29,7 @@ namespace ContentManagerDesktopApp
         }
         
 
-
+        // Create a foler in dropbox
         public async Task<FolderMetadata> CreateFolder(string path) //DropboxClient client, 
         {
             dBoxStatus = GlobalVariables.DropBoxStatus.Creating;
@@ -41,6 +41,7 @@ namespace ContentManagerDesktopApp
             return folder.Metadata;
         }
 
+        // List folders from dropbox
         public async Task<ListFolderResult> ListFolder(string path)
         {
             Console.WriteLine("--- Files ---");
@@ -90,7 +91,7 @@ namespace ContentManagerDesktopApp
             {
                 var list = await client.Files.ListFolderAsync(path);
 
-                foreach (var item in list.Entries.Where(i => i.IsFile)) // populating list of files(pictures)
+                foreach (var item in list.Entries.Where(i => i.IsFile))
                 {
                     var file = item.AsFile;
                     string fileName = file.Name;
@@ -98,8 +99,7 @@ namespace ContentManagerDesktopApp
                     using (var response = await client.Files.DownloadAsync(path + "/" + fileName))
                     {
                         string nameDirectory = directory + "\\Pictures\\" + file.Name;
-                        //using (var fileStream = File.Create(directory))
-                        using (var fileStream = File.OpenWrite(nameDirectory))//directory
+                        using (var fileStream = File.OpenWrite(nameDirectory))
                         {
                             (await response.GetContentAsStreamAsync()).CopyTo(fileStream);
                         }
@@ -112,18 +112,6 @@ namespace ContentManagerDesktopApp
             }
             
 
-        }
-
-        public async Task Upload(string folder, string fileName, string fileContent)//DropboxClient client, 
-        {
-            Console.WriteLine("Upload file...");
-
-            using (var stream = new MemoryStream(System.Text.UTF8Encoding.UTF8.GetBytes(fileContent)))
-            {
-                var response = await client.Files.UploadAsync(folder + "/" + fileName, WriteMode.Overwrite.Instance, body: stream);
-
-                Console.WriteLine("Uploaded Id {0} Rev {1}", response.Id, response.Rev);
-            }
         }
         
     }

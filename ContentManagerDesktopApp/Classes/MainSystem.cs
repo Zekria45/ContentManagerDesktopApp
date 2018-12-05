@@ -13,7 +13,7 @@ namespace ContentManagerDesktopApp
     {
 
         public String userDirectory = @"C:\Content Manager\Users";
-        public DBConnect mySQLConnect = new DBConnect();
+        public SQLConnect mySQLConnect = new SQLConnect();
         DropBoxAccess dbAccess; // dropbox access
         string mySQLStatus;
         public User mainUser = new User();
@@ -27,7 +27,7 @@ namespace ContentManagerDesktopApp
             }
         }
         
-
+        // used to be able to login
         public bool VerifyLogin(String username, string password)
         {
             mainUser = mySQLConnect.Login(username, password); 
@@ -135,7 +135,7 @@ namespace ContentManagerDesktopApp
             return false; ;
         }
 
-        public string sqlCommandBuilder(List<string> valueList) // creates a command that will be sent to DBConnect Functions
+        public string sqlCommandBuilder(List<string> valueList) // creates a command that will be sent to SQLConnect
         {
             string firstString = valueList[0];
             string lastString = valueList[valueList.Count - 1];
@@ -165,6 +165,7 @@ namespace ContentManagerDesktopApp
             return command;
         }
 
+        //initializing dropbox
         private bool initDropBox()
         {
             try
@@ -178,11 +179,6 @@ namespace ContentManagerDesktopApp
                 return false;
             }
         }
-
-        /*
-        
-
-        */
         public bool createFolder(string path) // create folder for dropbox
         {
             try
@@ -211,6 +207,7 @@ namespace ContentManagerDesktopApp
             return false;
         }
 
+        // download images as seperate task from dropbox
         public bool downloadImages(string path, string directory)
         {
             try

@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DBConnect.cs" />
+    <Compile Include="Classes\SQLConnect.cs" />
     <Compile Include="Classes\DropBoxAccess.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>

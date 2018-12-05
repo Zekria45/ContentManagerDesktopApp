@@ -9,7 +9,7 @@ namespace ContentManagerDesktopApp
     // code is based off https://www.codeproject.com/Articles/43438/Connect-C-to-MySQL
     // database connect
 
-    public class DBConnect
+    public class SQLConnect
     {
         static string failedKey = "failed key";
 
@@ -21,7 +21,7 @@ namespace ContentManagerDesktopApp
         public string message = "";
 
         //Constructor
-        public DBConnect()
+        public SQLConnect()
         {
             Initialize();
         }

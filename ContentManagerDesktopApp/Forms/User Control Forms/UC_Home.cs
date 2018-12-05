@@ -30,6 +30,7 @@ namespace ContentManagerDesktopApp
 
         private void listViewProperties()
         {
+            // adjusting properties of list view
             imageList.View = View.Details;
             imageList.Columns.Add("Images",200);
             imageList.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -49,9 +50,8 @@ namespace ContentManagerDesktopApp
                 foreach (String path in localPaths)
                 {
                     Image img = Image.FromFile(path);
-                    //string xyz = "A=B&C=D&E=F";
-                    //string output = xyz.Replace("&C=D", "");
                     string rawPath = path;
+                    //gets image name
                     img.Tag = rawPath.Replace(fullPath+"\\","");
                     listOfImages.Images.Add(img);
                     fileNames.Add(img.Tag.ToString());
@@ -78,12 +78,16 @@ namespace ContentManagerDesktopApp
                 string fileName = imageList.SelectedItems[0].SubItems[0].Text;
                 string endDirectory = fullPath + "\\" + fileName;
                 mainPictureBox.Image = Image.FromFile(@endDirectory);
-                //MessageBox.Show(fileName);
             }
             catch(Exception ex)
             {
-
+                // Do nothing
             }
+        }
+
+        private void imageList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

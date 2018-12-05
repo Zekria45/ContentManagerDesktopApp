@@ -8,6 +8,8 @@ namespace ContentManagerDesktopApp
 {
     public class User
     {
+        // basic logged in info
+
         public enum UserType {admin, user }
         public UserType usertype = UserType.user;
         public String userName;

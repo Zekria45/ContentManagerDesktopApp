@@ -40,7 +40,7 @@ namespace ContentManagerDesktopApp
             ImageList listOfImages = new ImageList();
             listOfImages.ImageSize = new Size(200,200);
             string fullPath = mainSystem.userDirectory + "\\" + mainSystem.mainUser.userName + "\\Pictures";
-            
+            List<String> fileNames = new List<string>();
 
             try
             {
@@ -48,22 +48,41 @@ namespace ContentManagerDesktopApp
                 // populate image list
                 foreach (String path in localPaths)
                 {
-                    listOfImages.Images.Add(Image.FromFile(path));
+                    Image img = Image.FromFile(path);
+                    //string xyz = "A=B&C=D&E=F";
+                    //string output = xyz.Replace("&C=D", "");
+                    string rawPath = path;
+                    img.Tag = rawPath.Replace(fullPath+"\\","");
+                    listOfImages.Images.Add(img);
+                    fileNames.Add(img.Tag.ToString());
                 }
                 imageList.SmallImageList = listOfImages;
                 int i = 0;
-                foreach(Image img in imageList.SmallImageList.Images)
+                foreach(String imgName in fileNames)
                 {
-                    imageList.Items.Add("test",i);
+                    imageList.Items.Add(imgName,i);
                     i++;
                 }
-                //imageList.Items.Add("Test", 0);
-                //imageList.Items.Add("Test", 0);
-
             }
-            catch
+            catch(Exception ex)
             {
                 // do nothing
+            }
+        }
+
+        private void imageList_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                string fullPath = mainSystem.userDirectory + "\\" + mainSystem.mainUser.userName + "\\Pictures";
+                string fileName = imageList.SelectedItems[0].SubItems[0].Text;
+                string endDirectory = fullPath + "\\" + fileName;
+                mainPictureBox.Image = Image.FromFile(@endDirectory);
+                //MessageBox.Show(fileName);
+            }
+            catch(Exception ex)
+            {
+
             }
         }
     }

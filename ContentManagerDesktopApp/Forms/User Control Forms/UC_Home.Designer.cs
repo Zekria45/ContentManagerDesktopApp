@@ -75,6 +75,7 @@
             this.imageList.Size = new System.Drawing.Size(376, 433);
             this.imageList.TabIndex = 7;
             this.imageList.UseCompatibleStateImageBehavior = false;
+            this.imageList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imageList_MouseClick);
             // 
             // UC_Home
             // 

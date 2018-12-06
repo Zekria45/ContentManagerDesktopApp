@@ -80,10 +80,10 @@
     <Compile Include="Forms\User Control Forms\UC_Home.Designer.cs">
       <DependentUpon>UC_Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC_Settings.cs">
+    <Compile Include="Forms\UC_Settings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_Settings.Designer.cs">
+    <Compile Include="Forms\UC_Settings.Designer.cs">
       <DependentUpon>UC_Settings.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\Form1.resx">
@@ -104,7 +104,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UC_Settings.resx">
+    <EmbeddedResource Include="Forms\UC_Settings.resx">
       <DependentUpon>UC_Settings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

@@ -9,5 +9,5 @@ This is a desktop app that serves to solve the problem of workers who are out on
 * Desktop app pulls all pictures and shows a list on the desktop app.
 * Desktop app shows all the comments for given picture (work in progress)
 
-# Authors
+# Author
 Zekria Ali

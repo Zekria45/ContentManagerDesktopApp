@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 using System.IO;
 using ContentManagerDesktopApp.Forms;
 using Dropbox.Api;
+using System.Xml;
 
 namespace ContentManagerDesktopApp
 {
     public class MainSystem
     {
 
-        public String userDirectory = @"C:\Content Manager\Users";
-        public SQLConnect mySQLConnect = new SQLConnect();
+        public string userDirectory = @"C:\Content Manager\Users";
+        public string systemDirectory = @"C:\Content Manager\System";
+        public SQLConnect mySQLConnect;
         DropBoxAccess dbAccess; // dropbox access
         string mySQLStatus;
         public User mainUser = new User();
 
         public MainSystem()
         {
+            createStartingXML();
+            mySQLConnect = new SQLConnect(systemDirectory);
             mySQLStatus = mySQLConnect.message;
+            
             if (!initDropBox())
             {
                 dbAccess = new DropBoxAccess("");
@@ -34,7 +39,7 @@ namespace ContentManagerDesktopApp
             if(!(mainUser.id == -1))
             {
                 mainUser.LogIn();
-                string dropBoxPath = "/Users/" + username;
+                string dropBoxPath = " / Users/" + username;
                 createFolder(dropBoxPath); // creating dropbox folder if not already made
                 string localMachinePath = userDirectory + "\\" + username;
                 downloadImages(dropBoxPath, localMachinePath);//string path, string directory
@@ -231,7 +236,47 @@ namespace ContentManagerDesktopApp
             dbAccess.dBoxStatus = status;
         }
 
-        
+        public void createStartingXML()
+        {
+            string fullDirectory = systemDirectory + "\\sqlInfo.xml";
 
+            if(!Directory.Exists(systemDirectory))
+            {
+                Directory.CreateDirectory(systemDirectory);
+            }
+
+            if (!File.Exists(fullDirectory))
+            {
+                try
+                {
+                    XmlTextWriter xmlWriter = new XmlTextWriter(fullDirectory, Encoding.UTF8);
+                    xmlWriter.Formatting = Formatting.Indented;
+                    xmlWriter.WriteStartElement("SQLinfo");
+
+                    xmlWriter.WriteStartElement("Server");
+                    xmlWriter.WriteString("localhost");
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("Database");
+                    xmlWriter.WriteString("userdatabasecm");
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("UserId");
+                    xmlWriter.WriteString("userid");
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteStartElement("Password");
+                    xmlWriter.WriteString("password");
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.Close();
+                }
+                catch(Exception ex)
+                {
+                    // do nothing
+                }
+            }
+        }
     }
 }

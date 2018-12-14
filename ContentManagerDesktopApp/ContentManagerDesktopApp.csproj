@@ -86,6 +86,7 @@
     <Compile Include="Forms\UC_Settings.Designer.cs">
       <DependentUpon>UC_Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\SQLInfo.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

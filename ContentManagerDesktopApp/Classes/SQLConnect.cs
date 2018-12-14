@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
 
 namespace ContentManagerDesktopApp
 {
@@ -19,20 +20,24 @@ namespace ContentManagerDesktopApp
         private string uid;
         private string password;
         public string message = "";
+        private SQLInfo sqlInfo;
+        private string systemDirectory;
 
         //Constructor
-        public SQLConnect()
+        public SQLConnect(string sysDirectory)
         {
-            Initialize();
+            systemDirectory = sysDirectory;
+            sqlInfo = xmlSQLInfo(sqlInfo);
+            Initialize(sqlInfo);
         }
 
         //Initialize values
-        private void Initialize()
+        private void Initialize(SQLInfo info)
         {
-            server = "localhost";
-            database = "userdatabasecm";
-            uid = "codeadmin";
-            password = "-password024-";
+            server = info.getServer();//"localhost";
+            database = info.getDataBase();//"userdatabasecm";
+            uid = info.getId();//"codeadmin";
+            password = info.getPassword();//"-password024-";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -228,5 +233,52 @@ namespace ContentManagerDesktopApp
                 return encPass;
             }
         }
+
+        public SQLInfo xmlSQLInfo(SQLInfo info)
+        {
+            string server = "null";
+            string database = "null";
+            string uid = "null";
+            string password = "null";
+
+            try
+            {
+                string directoryVal = systemDirectory + "\\sqlinfo.xml";
+                XmlDocument doc = new XmlDocument();
+                doc.Load(directoryVal);
+
+                foreach(XmlNode node in doc.DocumentElement.ChildNodes)
+                {
+                    string element = node.Name;
+                    string val = node.InnerText;
+                    if (element == "Server")
+                    {
+                        server = val;
+                    }
+                    else if(element == "Database")
+                    {
+                        database = val;
+                    }
+                    else if(element == "UserId")
+                    {
+                        uid = val;
+                    }
+                    else if(element == "Password")
+                    {
+                        password = val;
+                    }
+                }
+
+                SQLInfo sqlInfo = new SQLInfo(server, database, uid, password);
+                return sqlInfo;
+            }
+            catch(Exception Ex)
+            {
+                // have bad info
+                SQLInfo sqlInfo = new SQLInfo(server, database, uid, password);
+                return sqlInfo;
+            }
+        }
+    
     }
 }

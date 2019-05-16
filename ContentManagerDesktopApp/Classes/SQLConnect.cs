@@ -121,47 +121,53 @@ namespace ContentManagerDesktopApp
         //Check login
         public User Login(string loginUser, string password)
         {
-            string query = "SELECT * FROM logininfo";
+            string query = "SELECT * FROM logininfo"; // mySQL command
             User nullUser = new User();
             string encryptKey = getSysInfo("encryptkey");// encryptkey
-            //string encrpyedPass = encryptPass(password);
 
             if (this.OpenConnection() == true)
             {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
+                try // attempts to generate user
                 {
-                    string pulledEncPass = dataReader["encryptpass"] + "";
-                    string rawPass = StringCipher.Decrypt(pulledEncPass,encryptKey);
-                    if (((dataReader["username"] + "") == loginUser))
+                    //Create Command
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    //Create a data reader and Execute the command
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
                     {
-                        if(password == rawPass)
+                        string pulledEncPass = dataReader["encryptpass"] + "";
+                        string rawPass = StringCipher.Decrypt(pulledEncPass, encryptKey);
+                        if (((dataReader["username"] + "") == loginUser))
                         {
-                            int id = Convert.ToInt32(dataReader["iduser"] + "");
-                            string userName = dataReader["username"] + "";
-                            string passWord = rawPass;
-                            User createdUser = new User(id, userName, passWord);
-                            dataReader.Close();
-                            this.CloseConnection();
-                            return createdUser;
+                            if (password == rawPass)
+                            {
+                                // reads info from mySQL then creates user object
+                                int id = Convert.ToInt32(dataReader["iduser"] + "");
+                                string userName = dataReader["username"] + "";
+                                string passWord = rawPass;
+                                User createdUser = new User(id, userName, passWord);
+                                // closes connections and reader
+                                dataReader.Close();
+                                this.CloseConnection();
+                                return createdUser;
+                            }
                         }
                     }
                 }
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-            }
-            else
-            {
-                return nullUser;
+                catch(Exception ex) // fails to generate user
+                {
+                    return nullUser;
+                }
             }
             return nullUser;
         }
+
+
+        //close Data Reader
+        //dataReader.Close();
+
+        //close Connection
+        //this.CloseConnection();
 
         private string getSysInfo(string valueToPull)
         {
